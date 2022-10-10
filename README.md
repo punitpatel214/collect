@@ -39,4 +39,8 @@ Some aspects of the solution to cover (as Frank McCourt once said, “the sky is
 ### NonFunctional Requirment
 - Scalability: The system should be scalable to accommodate growing data responses.
 - Reliability: The system should be highly reliable to avoid missing critical alerts.
-- Flexibility: Technology keeps changing, so the pipeline should be flexible enough to easily integrate new technologies in the future.  
+- Flexibility: Technology keeps changing, so the pipeline should be flexible enough to easily integrate new technologies in the future.
+<br/>
+<p align="center">
+  <img src="diagram/High-level-Flow.jpg"  title="Collect data flow"/>
+</p>
