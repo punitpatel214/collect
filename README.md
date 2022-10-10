@@ -67,5 +67,8 @@ Apache Kafka is used for storing streaming data, to let application developers b
 
 There are a couple of ways that we can leverage Kafka’s built-in partition mechanism to scale our system.
 - Configure the number of partitions based on throughput requirements.
-- Partition metrics data by metric names, so consumers can aggregate data by metrics names.
+- Partition response by form id or another parameter, so consumers can aggregate data by form id.
 
+<p align="left">
+  <img src="diagram/Kafka-Scale.jpg" title="Collect data flow"/>
+</p>
