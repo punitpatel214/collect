@@ -23,3 +23,20 @@ Some aspects of the solution to cover (as Frank McCourt once said, “the sky is
 - Already existing tools you’d want to use and what to build and why?
 - How do you know this design will hold and up to when? is there a way to quantify/measure the quality of your design?
 - Potential caveats in your solution
+
+### Questions/Assumption
+- What is the scale of data that collected by app ?
+  <br/> 1 million response per day
+- Data analyses real time or process after certain duration or size (batch) ?
+   <br/> both
+- How long should we keep the data ?
+  <br/> 1 year or configurable
+- Data collection done by only android app ?
+  <br/> currently by android app only in future integrate with web, third party apps.
+- Which third party integration supported ?
+  <br/> Google sheet, Power BI and others. System should easy to integrate with third party tools.
+  
+### NonFunctional Requirment
+- Scalability: The system should be scalable to accommodate growing data responses.
+- Reliability: The system should be highly reliable to avoid missing critical alerts.
+- Flexibility: Technology keeps changing, so the pipeline should be flexible enough to easily integrate new technologies in the future.  
