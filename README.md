@@ -69,6 +69,29 @@ There are a couple of ways that we can leverage Kafka’s built-in partition mec
 - Configure the number of partitions based on throughput requirements.
 - Partition response by form id or another parameter, so consumers can aggregate data by form id.
 
-<p align="left">
+<p align="center" style = "padding:10px,10px,10px,10px;">
   <img src="diagram/Kafka-Scale.jpg" title="Collect data flow"/>
 </p>
+
+## Data Pipeline
+Here we need to series of data processing operation like  **descriptive**, **diagnostic**, **predictive**, and **prescriptive**. We can use data pipeline for achieve all data processiong.
+
+
+Data pipelines consist of three key elements: a source, a processing step or steps, and a destination. In some data pipelines, the destination may be called a sink. Data pipelines enable the flow of data from an application to a data warehouse, from a data lake to an analytics database, or into a payment processing system, for example. Data pipelines also may have the same source and sink, such that the pipeline is purely about modifying the data set. Any time data is processed between point A and point B (or points B, C, and D), there is a data pipeline between those points.
+
+Data pipeline can be implemented by using Batching or Streaming or both.
+
+#### Streaming vs batching
+
+|   |  Online System | Batch System (Offline System)  | Streaming System (near real-time)  |
+|---|---|---|---|
+| Responsiveness    |	Respond to the client quickly |	No response to the client needed	| No response to the client needed  |
+| Input	| User requests	Bounded | input with finite size. | A large amount of data	Input has no boundary (infinite streams) |
+| Output	| Responses to clients |	Materialized views, aggregated metrics, etc.	| Materialized views, aggregated metrics, etc. |
+| Performance measurement	| Availability,latency | Throughput | Throughput, latency |
+| Example	| Online shopping	| MapReduce |	Flink |
+
+
+In our design, both stream processing and batch processing are used. We utilized stream processing to process data as it arrives and generates results in a near real-time fashion. We utilized batch processing for response that not reequire real time result and also can be used for hiisorical data backup and.
+
+For a system that contains two processing paths (batch and streaming) simultaneously, this architecture is called [lambda-architecture](https://www.databricks.com/glossary/lambda-architecture). A disadvantage of lambda architecture is that you have two processing paths, meaning there are two codebases to maintain. [Kappa architecture](https://hazelcast.com/glossary/kappa-architecture/), which combines the batch and streaming in one processing path, solves the problem. The key idea is to handle both real-time data processing and continuous data reprocessing using a single stream processing engine. Below figure shows a comparison of lambda and kappa architecture.
