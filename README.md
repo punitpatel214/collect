@@ -96,5 +96,8 @@ In our design, both stream processing and batch processing are used. We utilized
 
 For a system that contains two processing paths (batch and streaming) simultaneously, this architecture is called [lambda-architecture](https://www.databricks.com/glossary/lambda-architecture). A disadvantage of lambda architecture is that you have two processing paths, meaning there are two codebases to maintain. [Kappa architecture](https://hazelcast.com/glossary/kappa-architecture/), which combines the batch and streaming in one processing path, solves the problem. The key idea is to handle both real-time data processing and continuous data reprocessing using a single stream processing engine. Below figure shows a comparison of lambda and kappa architecture.
 
+<p align="center" >
+  <img src="diagram/Kappa-Lamda.svg" title="Kappa and Lambda Architecture"/>
+</p>
 
 
