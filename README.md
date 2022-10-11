@@ -213,7 +213,8 @@ SQL databases, also known as relational databases, were designed to store data t
 
 MongoDB, there is no need to predefine any schema. A collection can store different types of documents without any problem. There is nothing to worry about if a new type of document arrives, it can easily be saved. The dynamic nature of MongoDB schema is useful because most of the data that is being generated as form-responses are non-structured.There are many good solutions available to support MongoDB analytics, including: data virtualization, translation, the MongoDB connector, and data warehousing with an ETL or ELT process.
 
-Form-response MongoDB is good choice.
+For Form-response data MongoDB is good choice.
 
 For Analytical, Dashbooard data we can use NoSQL data or analytical tool like Power BI, tableau or other.
 
+###
