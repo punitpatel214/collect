@@ -226,3 +226,29 @@ For Analytical, Dashbooard data we can use NoSQL data or analytical tool like Po
 - Ingestion Service create kafka message for form response and send it to kafka topic
 - Form Service has kafka consumer to consume form response message and store it to mongo. MongoDB used for CRUD operations
 - Other flow is Data pipeline where form response process by multiple streaming procession app and generate analytical data, dashboard data and integrate with other tool like googlle sheet, Power BI, Amazon S3 and others.
+
+#### Deployment 
+
+###### Kubernetes
+Kubernetes is designed to be deployed anywhere, meaning you can use it on a private cloud, a public cloud, or a hybrid cloud.
+1. Self-Healing and Load-Balancing
+As an orchestrator, Kubernetes primarily brings self-healing and load-balancing to your deployed applications. It will automatically restart the pods that are not in a stable state and make it simple to scale your application by design.
+
+2. Configurable and Reproducible Build
+Thanks to its definition files being written in YAML, a declarative language, Kubernetes is adapted to GitOps by design, enforcing a highly configurable and reproducible build. Those definition files also bring abstraction around concepts that could be complex to implement otherwise, such as update strategies (rolling release, blue/green, canary, ...).
+
+**Pipeline Jungles** 
+<br/>Pipeline jungles often appear in data preparation. These can evolve organically, as new signals are identified and new information sources added incrementally. Without care, the resulting system for preparing data may become a jungle of scrapes, joins, and sampling steps, often with intermediate files output. Managing these pipelines, detecting errors and recovering from failures are all difficult and costly.
+
+**How to avoid pipeline jungles**
+<br/>Use a workflow engine.There are a lot of workflow engines that help with pipeline orchestrations and building ETLs. Need to find best workflow tool to fit our case.
+
+##### [Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/v1/sdk/sdk-overview/) SDK to run [Argo Workflows](https://github.com/argoproj/argo-workflows).
+
+**Why Argo Workflows?**
+<br/>The simple answer is that it’s cloud-native, which means that if you already have a Kubernetes cluster running, Argo is implemented as a Kubernetes CRD and allows you to run pipelines natively on your cluster. With Argo, each task executes in a pod and you can easily execute multiple tasks as a DAG. It contains many important features such as passing artifacts between tasks, parameterization, scheduling and more.
+- Argo Workflows is the most popular workflow execution engine for Kubernetes.
+- It can run 1000s of workflows a day, each with 1000s of concurrent tasks.
+- It is lighter-weight, faster, more powerful, and easier to use
+- Designed from the ground up for containers without the overhead and limitations of legacy VM and server-based environments.
+- Cloud agnostic and can run on any Kubernetes cluster.
