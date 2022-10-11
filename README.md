@@ -252,3 +252,7 @@ Thanks to its definition files being written in YAML, a declarative language, Ku
 - It is lighter-weight, faster, more powerful, and easier to use
 - Designed from the ground up for containers without the overhead and limitations of legacy VM and server-based environments.
 - Cloud agnostic and can run on any Kubernetes cluster.
+
+<p align="center" height=200 width=200>
+  <img src="diagram/argo-workflow.png" title="Collect data flow"/>
+</p>
