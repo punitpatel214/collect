@@ -217,4 +217,12 @@ For Form-response data MongoDB is good choice.
 
 For Analytical, Dashbooard data we can use NoSQL data or analytical tool like Power BI, tableau or other.
 
-###
+#### Design 
+<p>
+ <img src="diagram/high-level-design.png" align="center" />
+</p>
+
+- Ingestion Service receive form responses, Ingestion service stateless and multiple instance up for load balance
+- Ingestion Service create kafka message for form response and send it to kafka topic
+- Form Service has kafka consumer to consume form response message and store it to mongo. MongoDB used for CRUD operations
+- Other flow is Data pipeline where form response process by multiple streaming procession app and generate analytical data, dashboard data and integrate with other tool like googlle sheet, Power BI, Amazon S3 and others.
