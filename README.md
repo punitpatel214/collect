@@ -35,8 +35,9 @@ Some aspects of the solution to cover (as Frank McCourt once said, “the sky is
   <br/> currently by android app only in future integrate with web, third party apps.
 - Which third party integration supported ?
   <br/> Google sheet, Power BI and others. System should easy to integrate with third party tools.
+- Assumption: Form Building and validation is out of scope for this challange. There is separate form-service which is responsible for form creation and validation.  
   
-## NonFunctional Requirment
+## Non-functional Requirment
 - Scalability: The system should be scalable to accommodate growing data responses.
 - Reliability: The system should be highly reliable to avoid missing critical alerts.
 - Flexibility: Technology keeps changing, so the pipeline should be flexible enough to easily integrate new technologies in the future.
@@ -100,4 +101,119 @@ For a system that contains two processing paths (batch and streaming) simultaneo
   <img src="diagram/Kappa-Lamda.svg" title="Kappa and Lambda Architecture"/>
 </p>
 
+### Data Model
+There are multiple types of data in the system.
+- Form Response (CRUD)
+- Analytical Data 
+- Dashboard and Alert Data
+- Archived Data
+
+#### Form Response
+We need to maintain form responses for partical time of duration. Also need to support CRUD operation.
+
+Sample Form Response :
+```
+{
+  "formId": "0VHCsOl4JCjrCxwfF7G8",
+  "responseTime": {
+    "totalTime": 54410
+  },
+  "lastModifiedOnDeviceAt": "2022-09-24T13:36:57.239+0000",
+  "submittedOnDeviceAt": "2022-09-24T13:36:57.239+0000",
+  "createdOnDeviceAt": "2022-09-24T13:36:02.829+0000",
+  "syncedFromDeviceAt": "2022-09-24T13:36:57.444+0000",
+  "client": "android",
+  "ip": "100.90.66.167",
+  "deviceId": "collect-bot-device",
+  "answers": [
+    {
+      "key": "Name",
+      "text": "Dixie",
+      "state": "active",
+      "questionId": "I2KSMRQz05kFlOLwJYHe",
+      "createdBy": "userId",
+      "createdOnDeviceAt": "2022-09-24T13:36:03.386+0000",
+      "lastModifiedOnDeviceAt": "2022-09-24T13:36:12.200+0000",
+      "questionType": "Text"
+    },
+    {
+      "key": "Gender",
+      "text": "Male",
+      "state": "active",
+      "questionId": "DBcLUrwL3sAgz7bIRTin",
+      "createdBy": "userId",
+      "createdOnDeviceAt": "2022-09-24T13:36:12.670+0000",
+      "lastModifiedOnDeviceAt": "2022-09-24T13:36:12.670+0000",
+      "questionType": "Choice"
+    },
+    {
+      "key": "Age",
+      "text": "26",
+      "state": "active",
+      "number": 26,
+      "questionId": "dLKQv4txPGAbkJxaoMpJ",
+      "createdBy": "userId",
+      "createdOnDeviceAt": "2022-09-24T13:36:15.663+0000",
+      "lastModifiedOnDeviceAt": "2022-09-24T13:36:15.663+0000",
+      "questionType": "Number"
+    },
+    {
+      "key": "Hobby",
+      "text": "Gardening 🥕, Reading books 📖, Playing Sports 🤾",
+      "state": "active",
+      "questionId": "unZDIQC2o87QMuBWrFiA",
+      "createdBy": "userId",
+      "createdOnDeviceAt": "2022-09-24T13:36:18.602+0000",
+      "lastModifiedOnDeviceAt": "2022-09-24T13:36:18.602+0000",
+      "questionType": "MultiChoice"
+    },
+    {
+      "key": "Phone",
+      "text": "ZA(+27)-605559400",
+      "phone": "+27605559400",
+      "state": "active",
+      "questionId": "4D31fFKbiq7StQ6X9drC",
+      "createdBy": "userId",
+      "createdOnDeviceAt": "2022-09-24T13:36:35.427+0000",
+      "lastModifiedOnDeviceAt": "2022-09-24T13:36:35.427+0000",
+      "questionType": "Phone"
+    },
+    {
+      "key": "Location",
+      "state": "active",
+      "questionId": "VKJYAKT6EyagCG09vpTf",
+      "responseId": "8852b8a2-20de-4b3a-82c4-baca736ffe04",
+      "createdBy": "userId",
+      "createdOnDeviceAt": "2022-09-24T13:36:54.817+0000",
+      "lastModifiedOnDeviceAt": "2022-09-24T13:36:54.817+0000",
+      "questionType": "Location",
+      "location": {
+        "coordinates": [
+          {
+            "latitude": 6.5243793,
+            "longitude": 3.3792057
+          }
+        ],
+        "type": "point"
+      }
+    }
+  ]
+}
+```
+
+#### Choose the right database
+When it comes to choosing the right database, we need to evaluate the following:
+- What does the data look like? Is the data relational? Is it a document or a blob?
+- Is the workflow read-heavy, write-heavy, or both?
+- Is transaction support needed?
+- Do the queries rely on many online analytical processing (OLAP) functions like SUM, COUNT?
+Relational databases can do the job, but scaling the write can be challenging. NoSQL databases like MongoDB, Cassandra and InfluxDB are more suitable because they are optimized for write. 
+
+SQL databases, also known as relational databases, were designed to store data that has a structured schema. The schema represents the design of the database to which the data should adhere to. 
+
+MongoDB, there is no need to predefine any schema. A collection can store different types of documents without any problem. There is nothing to worry about if a new type of document arrives, it can easily be saved. The dynamic nature of MongoDB schema is useful because most of the data that is being generated as form-responses are non-structured.There are many good solutions available to support MongoDB analytics, including: data virtualization, translation, the MongoDB connector, and data warehousing with an ETL or ELT process.
+
+Form-response MongoDB is good choice.
+
+For Analytical, Dashbooard data we can use NoSQL data or analytical tool like Power BI, tableau or other.
 
