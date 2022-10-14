@@ -256,3 +256,10 @@ Thanks to its definition files being written in YAML, a declarative language, Ku
 <p align="center" height=200 width=200>
   <img src="diagram/argo-workflow.png" title="Collect data flow"/>
 </p>
+
+#### Authentication and Authorization
+Authentication is the process of verifying the identity of the entity he/she/it claims to be. 
+Authorization is the process of verifying if the entity is authorized to access specific information or is allowed to execute certain actions.
+
+<br/>In regards to the total security flow, both principles fit in and the combination could still make a request fail. 
+In the rule, authentication comes first, authorization second. When a user is authenticated but not authorized, the request will still fail.
