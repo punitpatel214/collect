@@ -274,3 +274,13 @@ OpenID Connect is an authentication protocol that is a simple identity layer on 
 How would the flow look like? A user requests access to an application. The application determines that the user is not authenticated yet and redirects the user to the identity server. The user authenticates with the identity server. The identity server sends on successful authentication an access token/ID token to the user. This token is signed by cryptographic keys. The user can authenticate with this token at the application. The application validates the signed key by checking if it is signed by the identity server by checking the public cryptographic key. If this is the case, the user is successfully authenticated!
 
 For the token, JSON Web Token (JWT) is used. A JWT consists of a header, payload, and signature. The header contains the algorithm used to sign the token. A payload is essentially a JSON object where additional properties about the user can be added. Since the token is signed by the identity server, the information can be trusted by the consuming application. The application can validate the token against the public key of the certificate used by the identity server for signing the token.
+
+<p align="center" height=200 width=200>
+  <img src="diagram/auth.jpeg" title="Collect data flow"/>
+</p>
+
+##### What is OAuth2?
+OAuth2 is an industry-standard authorization protocol. It offers specific authorization flows (described as grants inside the specification) for web applications, desktop applications, mobile phones and living room devices.
+The flow described in the OpenID Connect explanation makes actually use of one of the supported grant types, the Authorization Code grant type to be exact.
+With this flow, the user is redirected to the Identity Server where authentication and authorization are handled. The client (the application that requests the user information) gets authorization by the user to the needed information. This is done by configuring the right scopes. Scopes resemble the type of data that a specific client has access to. Examples of scopes are email and address, which resemble respectively the user’s email address and address.
+The scopes are requested by the application during the authentication process. When the user authenticates himself on the identity server, the user as well gets the possibility to give the application authorization for the requested data. When given authorization, the data will be added to the payload of the token and passed to the application.
