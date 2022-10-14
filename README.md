@@ -307,4 +307,17 @@ Kafka has build in support for multiple authentication and authorization.see [Ka
 Initial level, API key and secret can be used for Authentication, And ACL configuration on kafka topic for publish and subscribe for authorization.
 
 
-#### 
+#### Performance of System
+Even the most well-designed data pipelines are not meant to be “set and forget.” The practice of measuring and monitoring the performance of pipelines is essential. You owe it to your team and stakeholders to set, and live up to, expectations when it comes to the reliability of your pipelines.
+
+Before determine what data you need to capture throughout pipelines, first decide what metrics you want to track.
+
+Choosing metrics should start with identifying what matters to system. Some examples include the following:
+
+- How many validation tests are run, and what percent of the total tests run pass
+- How frequently a specific DAG runs successfully
+- The total runtime of a pipeline over the course of weeks, months, and years
+
+##### HOW MANY METRICS TO TRACK?
+Beware of a common trap: looking at too many metrics! Just as there is danger in relying on a single metric to tell the entire story of pipeline performance and reliability, too many metrics make it difficult to focus on what’s most important. Choose two to three metrics at most to focus on. It’s also important to ensure that they each have a unique purpose rather than overlapping in what they measure.
+
