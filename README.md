@@ -282,5 +282,19 @@ For the token, JSON Web Token (JWT) is used. A JWT consists of a header, payload
 ##### What is OAuth2?
 OAuth2 is an industry-standard authorization protocol. It offers specific authorization flows (described as grants inside the specification) for web applications, desktop applications, mobile phones and living room devices.
 The flow described in the OpenID Connect explanation makes actually use of one of the supported grant types, the Authorization Code grant type to be exact.
+
 With this flow, the user is redirected to the Identity Server where authentication and authorization are handled. The client (the application that requests the user information) gets authorization by the user to the needed information. This is done by configuring the right scopes. Scopes resemble the type of data that a specific client has access to. Examples of scopes are email and address, which resemble respectively the user’s email address and address.
+
 The scopes are requested by the application during the authentication process. When the user authenticates himself on the identity server, the user as well gets the possibility to give the application authorization for the requested data. When given authorization, the data will be added to the payload of the token and passed to the application.
+
+In the identity server, there is the possibility to persist the roles that are connected to the user. An identity server could be set up for all employees in a company. These employees have different roles depending on their role in the company. The identity server could share the assigned roles to a specific user in the token. In this way, this can be shared with consuming applications.
+
+Services itself should not be exposed directly to the consuming application. Managing connections to all your services becomes unmanageable.
+Implementing an **API gateway** creates a single entry point for consumers to communicate with. The API gateway routes the requests to the upstream services.
+
+The API gateway should pass the JWT along with the request towards the service. As explained before, the JWT will contain the roles assigned to the user. Since the API gateway is still responsible for authentication, validating the token has already been done when the service receives the request. With the assigned roles to the user executing the request, the service can now determine whether the user is authorized for the desired request. In this way, the application-specific only needs to be implemented in one place. A drawback of this is that authorization will be more scattered around in multiple services. When having a lot of roles that change very often, this becomes more tedious to manage.
+
+##### Authentication and Authorization in Ingestion Service and Form Service
+Authentication and authorization to these  inside a these services are usually implemented in a centralized service that is responsible for this. There are several solutions for this, like WSO2 Kong, WSO2 Identity Server, Kong, SwaggerHub and Tyk. These services support OAuth2 and OpenID Connect, which are underlying, industry-standard protocols for authorization and authentication.
+
+
