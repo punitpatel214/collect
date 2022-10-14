@@ -297,4 +297,14 @@ The API gateway should pass the JWT along with the request towards the service. 
 ##### Authentication and Authorization in Ingestion Service and Form Service
 Authentication and authorization to these  inside a these services are usually implemented in a centralized service that is responsible for this. There are several solutions for this, like WSO2 Kong, WSO2 Identity Server, Kong, SwaggerHub and Tyk. These services support OAuth2 and OpenID Connect, which are underlying, industry-standard protocols for authorization and authentication.
 
+<p align="center" height=200 width=200>
+  <img src="diagram/Auth-Flow.jpg" title="Collect data flow"/>
+</p>
 
+##### Authenticating to Kafka
+Kafka has build in support for multiple authentication and authorization.see [Kafka Authentication](https://docs.confluent.io/platform/current/kafka/overview-authentication-methods.html#mtls)
+
+Initial level, API key and secret can be used for Authentication, And ACL configuration on kafka topic for publish and subscribe for authorization.
+
+
+#### 
