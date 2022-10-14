@@ -12,7 +12,7 @@ This section contains the requirements, distilled from the [provided document](h
  
  
 ## Challange
-Creae Architectural solution for above requirments. Initially limit sope of this task to just descriptive analysis. <br/>
+Create Architectural solution for above requirments. Initially limit sope of this task to just descriptive analysis. <br/>
 Some aspects of the solution to cover (as Frank McCourt once said, “the sky is the limit,” so feel free to not be limited to these): 
 - Authorization levels in the platform
 - What to use for and how to store the data points [schematics] coming in?
