@@ -263,3 +263,14 @@ Authorization is the process of verifying if the entity is authorized to access 
 
 <br/>In regards to the total security flow, both principles fit in and the combination could still make a request fail. 
 In the rule, authentication comes first, authorization second. When a user is authenticated but not authorized, the request will still fail.
+
+Service should be solely responsible for its single piece of business logic. Authentication is in this case a cross-cutting concern and shouldn’t be part of the service itself.
+
+A widely used solution for this problem is to implement a separate identity server. This service is responsible hosting centralized authentication and authorization. There are several solutions for this, like Kong, WSO2 Identity Server, Kong, SwaggerHub and Tyk.  
+
+##### What is OpenID Connect?
+OpenID Connect is an authentication protocol that is a simple identity layer on top of OAuth2. It allows clients to identify clients to verify the identity of a user by an external authorization server like Google, Facebook or a embedded login system in the identity server.
+
+How would the flow look like? A user requests access to an application. The application determines that the user is not authenticated yet and redirects the user to the identity server. The user authenticates with the identity server. The identity server sends on successful authentication an access token/ID token to the user. This token is signed by cryptographic keys. The user can authenticate with this token at the application. The application validates the signed key by checking if it is signed by the identity server by checking the public cryptographic key. If this is the case, the user is successfully authenticated!
+
+For the token, JSON Web Token (JWT) is used. A JWT consists of a header, payload, and signature. The header contains the algorithm used to sign the token. A payload is essentially a JSON object where additional properties about the user can be added. Since the token is signed by the identity server, the information can be trusted by the consuming application. The application can validate the token against the public key of the certificate used by the identity server for signing the token.
